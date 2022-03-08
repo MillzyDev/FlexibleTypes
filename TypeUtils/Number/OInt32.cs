@@ -2,10 +2,10 @@
 using System.Diagnostics.Contracts;
 using System.Globalization;
 
-namespace TypeUtils
+namespace TypeUtils.Number
 {
     /// <summary>
-    /// Overflowable 32 bit Integer.
+    /// Overflowable 32 bit Integer. OInt32 or oint
     /// <para><see cref="int"/> implementation where the <see cref="OInt32.MinValue"/> and <see cref="OInt32.MaxValue"/> are not constant.</para>
     /// <para>If the value receeds or exceeds <see cref="MinValue"/> or <see cref="OInt32.MaxValue"/> then it will wrap back around.</para>
     /// </summary>
@@ -14,8 +14,9 @@ namespace TypeUtils
     /// If the <see cref="OInt32"/> instance is set to a value beyond the maximum value, the value will be the maximum value, the same is true for any value before the minimum value
     /// <code>
     /// using TypeUtils.Number;
+    /// using oint = OInt32;
     /// ...
-    /// OInt32 i; // MaxValue is int.MaxValue and MinValue is int.MinValue by default.
+    /// oint i; // MaxValue is int.MaxValue and MinValue is int.MinValue by default.
     /// i.MaxValue = 5;
     /// i.MinValue = 0;
     /// 
