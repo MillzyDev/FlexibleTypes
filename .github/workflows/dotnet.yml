@@ -21,3 +21,8 @@ jobs:
       run: dotnet restore TypeUtils/TypeUtils.csproj
     - name: Build
       run: dotnet build TypeUtils/TypeUtils.csproj --no-restore 
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: TypeUtils
+        path: TypeUtils/TypeUtils/bin/Debug/netstandard2.1/TypeUtils.dll
