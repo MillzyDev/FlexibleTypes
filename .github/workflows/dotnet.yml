@@ -20,4 +20,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore TypeUtils/TypeUtils.csproj
     - name: Build
-      run: dotnet build TypeUtile.TypeUtils.csproj --no-restore 
+      run: dotnet build TypeUtils/TypeUtils.csproj --no-restore 
