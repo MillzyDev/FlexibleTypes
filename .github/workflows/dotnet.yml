@@ -1,4 +1,4 @@
-name: .NET
+name: Build Windows
 
 on:
   push:
@@ -13,11 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Standard
+    - name: Setup .NET Standardc 2.1
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.1.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore TypeUtils/TypeUtils.csproj
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build TypeUtile.TypeUtils.csproj --no-restore 
