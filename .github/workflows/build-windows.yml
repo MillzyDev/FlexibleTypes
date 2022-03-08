@@ -24,5 +24,5 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: TypeUtils
+        name: TypeUtils.dll
         path: /home/runner/work/TypeUtils/TypeUtils/TypeUtils/bin/Debug/netstandard2.1/TypeUtils.dll
