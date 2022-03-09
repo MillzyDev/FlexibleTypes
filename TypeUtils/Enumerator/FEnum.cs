@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TypeUtils.Enumerator
+namespace FlexibleTypes.Enumerator
 {
     /// <summary>
     /// A custom enumerator that allows you to use any type for the Enumeration
@@ -10,11 +10,11 @@ namespace TypeUtils.Enumerator
     /// <typeparam name="T">The type that should be used for the Enumeration</typeparam>
     /// <example>
     /// <code>
-    /// using TupleEnum = TypeUtils.Enumerator.IFlexibleEnumerator<System.Tuple<string, string>>;
-    /// using FValue = TypeUtils.Enumerator.IFlexibleEnumerator<System.Tuple<string, string>>.FlexibleValue;
+    /// using TupleEnum = FlexibleTypes.Enumerator.IFlexibleEnumerator<System.Tuple<string, string>>;
+    /// using FValue = FlexibleTypes.Enumerator.IFlexibleEnumerator<System.Tuple<string, string>>.FlexibleValue;
     /// using Value = System.Tuple<string, string>;
     ///
-    /// namespace TypeUtils.Tests
+    /// namespace FlexibleTypes.Tests
     ///{
     ///    internal class Language : TupleEnum
     ///    {

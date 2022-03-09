@@ -2,7 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Globalization;
 
-namespace TypeUtils.Integer
+namespace FlexibleTypes.Integer
 {
     /// <summary>
     /// Flexible 64 bit Integer. FInt64 or flong
@@ -13,7 +13,7 @@ namespace TypeUtils.Integer
     /// If the max value is <c>5</c> and the min value is <c>0</c>: When the <see cref="FInt64"/> instance increments past 5, it will become 0.
     /// If the <see cref="FInt64"/> instance is set to a value beyond the maximum value, the value will be the maximum value, the same is true for any value before the minimum value
     /// <code>
-    /// using TypeUtils.Number;
+    /// using FlexibleTypes.Number;
     /// using flong = FInt64
     /// ...
     /// flong i; // MaxValue is long.MaxValue and MinValue is long.MinValue by default.

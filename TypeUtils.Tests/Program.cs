@@ -1,6 +1,6 @@
-﻿using fint = TypeUtils.Integer.FInt32;
+﻿using fint = FlexibleTypes.Integer.FInt32;
 
-namespace TypeUtils.Tests
+namespace FlexibleTypes.Tests
 {
     class Program
     {

@@ -18,15 +18,15 @@ jobs:
       with:
         dotnet-version: 6.x.x
     - name: Restore dependencies
-      run: dotnet restore TypeUtils/TypeUtils.csproj
+      run: dotnet restore FlexibleTypes/FlexibleTypes.csproj
     - name: Build
-      run: dotnet build TypeUtils/TypeUtils.csproj --no-restore 
+      run: dotnet build FlexibleTypes/FlexibleTypes.csproj --no-restore 
     - name: Build Tests
-      run: dotnet build TypeUtils.Tests/TypeUtils.Tests.csproj
+      run: dotnet build FlexibleTypes.Tests/FlexibleTypes.Tests.csproj
     - name: Run Tests
-      run: TypeUtils.Tests/bin/Debug/net6.0/TypeUtils.Tests.exe
+      run: /home/runner/work/FlexibleTypes/FlexibleTypes/FlexibleTypes.Tests/bin/Debug/net6.0/FlexibleTypes.Tests.exe
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: TypeUtils.dll
-        path: /home/runner/work/TypeUtils/TypeUtils/TypeUtils/bin/Debug/netstandard2.1/TypeUtils.dll
+        name: FlexibleTypes.dll
+        path: /home/runner/work/FlexibleTypes/FlexibleTypes/FlexibleTypes/bin/Debug/netstandard2.1/FlexibleTypes.dll

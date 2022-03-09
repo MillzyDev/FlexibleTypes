@@ -1,7 +1,7 @@
-﻿using TypeUtils.Enumerator;
+﻿using FlexibleTypes.Enumerator;
 using Value = System.Tuple<string, string>;
 
-namespace TypeUtils.Tests
+namespace FlexibleTypes.Tests
 {
     internal class Language : FEnum<Value>
     {
