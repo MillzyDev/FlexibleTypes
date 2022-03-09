@@ -2,40 +2,40 @@
 using System.Diagnostics.Contracts;
 using System.Globalization;
 
-namespace TypeUtils.Number
+namespace TypeUtils.Integer
 {
     /// <summary>
-    /// Overflowable 32 bit Integer. OInt32 or oint
-    /// <para><see cref="int"/> implementation where the <see cref="OInt32.MinValue"/> and <see cref="OInt32.MaxValue"/> are not constant.</para>
-    /// <para>If the value receeds or exceeds <see cref="MinValue"/> or <see cref="OInt32.MaxValue"/> then it will wrap back around.</para>
+    /// Flexible 64 bit Integer. FInt64 or fint
+    /// <para><see cref="int"/> implementation where the <see cref="MinValue"/> and <see cref="MaxValue"/> are not constant.</para>
+    /// <para>If the value receeds or exceeds <see cref="MinValue"/> or <see cref="MaxValue"/> then it will wrap back around.</para>
     /// </summary>
     /// <example>
-    /// If the max value is <c>5</c> and the min value is <c>0</c>: When the <see cref="OInt32"/> instance increments past 5, it will become 0.
-    /// If the <see cref="OInt32"/> instance is set to a value beyond the maximum value, the value will be the maximum value, the same is true for any value before the minimum value
+    /// If the max value is <c>5</c> and the min value is <c>0</c>: When the <see cref="FInt64"/> instance increments past 5, it will become 0.
+    /// If the <see cref="FInt32"/> instance is set to a value beyond the maximum value, the value will be the maximum value, the same is true for any value before the minimum value
     /// <code>
     /// using TypeUtils.Number;
-    /// using oint = OInt32;
+    /// using fint = FInt64
     /// ...
-    /// oint i; // MaxValue is int.MaxValue and MinValue is int.MinValue by default.
+    /// fint i; // MaxValue is int.MaxValue and MinValue is int.MinValue by default.
     /// i.MaxValue = 5;
     /// i.MinValue = 0;
     /// 
     /// /*    or    */
     ///     
-    /// OInt32 i = new OInt32(0, min: 0, max: 5);
+    /// fint i = new fint(0, min: 0, max: 5);
     /// 
     /// i = 5;
     /// i++; // Will wrap around and become 0
     /// </code>
     /// </example>
-    public struct OInt32 : IComparable, IComparable<OInt32>, IConvertible, IEquatable<OInt32>, IFormattable
+    public struct FInt32 : IComparable, IComparable<FInt32>, IConvertible, IEquatable<FInt32>, IFormattable
     {
         /// <summary>
-        /// <see cref="OInt32"/> instance where <see cref="Value"/> is <c>0</c>, <see cref="MaxValue"/> is <see cref="int.MaxValue"/> and <see cref="MinValue"/> is <see cref="int.MinValue"/>
+        /// <see cref="FInt32"/> instance where <see cref="Value"/> is <c>0</c>, <see cref="MaxValue"/> is <see cref="int.MaxValue"/> and <see cref="MinValue"/> is <see cref="int.MinValue"/>
         /// </summary>
-        public static OInt32 Default
+        public static FInt32 Default
         {
-            get => new OInt32(0);
+            get => new FInt32(0);
         }
 
         private int _value;
@@ -60,7 +60,7 @@ namespace TypeUtils.Number
         /// </summary>
         public int MinValue { get; set; }
 
-        public OInt32(int value, int min = int.MinValue, int max = int.MaxValue)
+        public FInt32(int value, int min = int.MinValue, int max = int.MaxValue)
         {
             (MaxValue, MinValue) = (max, min);
             if (value > MaxValue || value < MinValue)
@@ -68,33 +68,63 @@ namespace TypeUtils.Number
             _value = value;
         }
 
-        public static implicit operator OInt32(int value) => new OInt32(value);
-        public static implicit operator int(OInt32 value) => value.Value;
+        /// <summary>
+        /// Implicitly converts a <see cref="int"/> value to a <see cref="FInt32"/>
+        /// </summary>
+        /// <param name="value"></param>
+        public static implicit operator FInt32(int value) => new FInt32(value);
+        /// <summary>
+        /// Implicitly converts a <see cref="FInt64"/> to a <see cref="int"/>
+        /// </summary>
+        /// <param name="value"></param>
+        public static implicit operator int(FInt32 value) => value.Value;
 
-        public static OInt32 operator ++(OInt32 value)
+        /// <summary>
+        /// Increments a <see cref="FInt32"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static FInt32 operator ++(FInt32 value)
         {
             value.Value++;
             if (value.Value > value.MaxValue) value.Value = value.MinValue;
             return value;
         }
 
-        public static OInt32 operator --(OInt32 value)
+        /// <summary>
+        /// Deincrements a <see cref="FInt32"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static FInt32 operator --(FInt32 value)
         {
             value.Value--;
             if (value.Value < value.MinValue) value.Value = value.MaxValue;
             return value;
         }
 
-        public static OInt32 operator +(OInt32 value, OInt32 other)
+        /// <summary>
+        /// Adds two <see cref="FInt32"/> instances together.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="other"></param>
+        /// <returns>The result of the calculation (<paramref name="value"/> + <paramref name="other"/>)</returns>
+        public static FInt32 operator +(FInt32 value, FInt32 other)
         {
-            return new OInt32(value.Value + other.Value,
+            return new FInt32(value.Value + other.Value,
                 value.MinValue < other.MinValue ? value.MinValue : other.MinValue,
                 value.MaxValue > other.MaxValue ? value.MaxValue : other.MaxValue);
         }
 
-        public static OInt32 operator -(OInt32 value, OInt32 other)
+        /// <summary>
+        /// Subtracts one <see cref="FInt64"/> from the other.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="other"></param>
+        /// <returns>The result of the calculation (<paramref name="value"/> + <paramref name="other"/>)</returns>
+        public static FInt32 operator -(FInt32 value, FInt32 other)
         {
-            return new OInt32(value.Value - other.Value,
+            return new FInt32(value.Value - other.Value,
                 value.MinValue < other.MinValue ? value.MinValue : other.MinValue,
                 value.MaxValue > other.MaxValue ? value.MaxValue : other.MaxValue);
         }
@@ -102,33 +132,41 @@ namespace TypeUtils.Number
         /*
          * IComparable Implementation
          */
+
+        /// <inheritdoc/>
+
         public int CompareTo(object obj)
         {
             if (obj == null)
                 return 1;
-            if (!(obj is OInt32))
-                throw new ArgumentException("Argument must be OInt32");
-            return CompareTo((OInt32)obj);
+            if (!(obj is FInt32))
+                throw new ArgumentException("Argument must be FInt32");
+            return CompareTo((FInt32)obj);
         }
+        /// <inheritdoc/>
 
-        public int CompareTo(OInt32 other)
+        public int CompareTo(FInt32 other)
         {
             if (Value < other) return -1;
             if (Value > other) return 1;
             return 0;
         }
-
         /*
          * IEquatable Implementation
          */
+
+        /// <inheritdoc/>
+
         public override bool Equals(object obj)
         {
-            if (obj is OInt32 @int)
+            if (obj is FInt32 @int)
                 return Equals(@int);
             return false;
         }
+        /// <inheritdoc/>
 
-        public bool Equals(OInt32 other) => Value == other;
+        public bool Equals(FInt32 other) => Value == other;
+        /// <inheritdoc/>
 
         // The absolute value for Value
         public override int GetHashCode()
@@ -139,104 +177,126 @@ namespace TypeUtils.Number
         /*
          * IConvertible Implementation
          */
+
+        /// <inheritdoc/>
         public bool ToBoolean(IFormatProvider provider)
         {
             return Convert.ToBoolean(Value);
         }
+        /// <inheritdoc/>
 
         public byte ToByte(IFormatProvider provider)
         {
             return Convert.ToByte(Value);
         }
+        /// <inheritdoc/>
 
         public char ToChar(IFormatProvider provider)
         {
             return Convert.ToChar(Value);
         }
+        /// <inheritdoc/>
 
         public DateTime ToDateTime(IFormatProvider provider)
         {
-            throw new InvalidCastException("Invalid cast from OInt32 to DateTime");
+            throw new InvalidCastException("Invalid cast from OInt64 to DateTime");
         }
+        /// <inheritdoc/>
 
         public decimal ToDecimal(IFormatProvider provider)
         {
             return Convert.ToDecimal(Value);
         }
+        /// <inheritdoc/>
 
         public double ToDouble(IFormatProvider provider)
         {
             return Convert.ToDouble(Value);
         }
+        /// <inheritdoc/>
+
 
         public short ToInt16(IFormatProvider provider)
         {
             return Convert.ToInt16(Value);
         }
+        /// <inheritdoc/>
 
         public int ToInt32(IFormatProvider provider)
         {
             return Convert.ToInt32(Value);
         }
+        /// <inheritdoc/>
 
         public long ToInt64(IFormatProvider provider)
         {
             return Convert.ToInt64(Value);
         }
+        /// <inheritdoc/>
 
         public sbyte ToSByte(IFormatProvider provider)
         {
             return Convert.ToSByte(Value);
         }
+        /// <inheritdoc/>
 
         public float ToSingle(IFormatProvider provider)
         {
             return Convert.ToSingle(Value);
         }
+        /// <inheritdoc/>
 
         public string ToString(IFormatProvider provider)
         {
             Contract.Ensures(Contract.Result<string>() != null);
             return ToString(provider);
         }
+        /// <inheritdoc/>
 
         public override string ToString()
         {
             Contract.Ensures(Contract.Result<string>() != null);
             return Value.ToString();
         }
+        /// <inheritdoc/>
 
         public string ToString(string format)
         {
             Contract.Ensures(Contract.Result<string>() != null);
             return Value.ToString(format);
         }
+        /// <inheritdoc/>
 
         public string ToString(string format, IFormatProvider provider)
         {
             Contract.Ensures(Contract.Result<string>() != null);
             return Value.ToString(format, provider);
         }
+        /// <inheritdoc/>
 
         public object ToType(Type conversionType, IFormatProvider provider)
         {
             throw new NotImplementedException();
         }
+        /// <inheritdoc/>
 
         public ushort ToUInt16(IFormatProvider provider)
         {
             return Convert.ToUInt16(Value, provider);
         }
+        /// <inheritdoc/>
 
         public uint ToUInt32(IFormatProvider provider)
         {
             return Convert.ToUInt32(Value, provider);
         }
+        /// <inheritdoc/>
 
         public ulong ToUInt64(IFormatProvider provider)
         {
             return Convert.ToUInt64(Value, provider);
         }
+        /// <inheritdoc/>
 
         public TypeCode GetTypeCode()
         {
@@ -246,38 +306,40 @@ namespace TypeUtils.Number
         /*
          * Parsing
          */
-        public static OInt32 Parse(string s)
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        public static FInt64 Parse(string s)
         {
             return int.Parse(s);
         }
 
-        public static OInt32 Parse(string s, NumberStyles style) 
+        public static FInt64 Parse(string s, NumberStyles style)
         {
             return int.Parse(s, style);
         }
 
-        public static OInt32 Parse(string s, IFormatProvider provider)
+        public static FInt64 Parse(string s, IFormatProvider provider)
         {
             return int.Parse(s, provider);
         }
 
-        public static OInt32 Parse(string s, NumberStyles style, IFormatProvider format)
+        public static FInt64 Parse(string s, NumberStyles style, IFormatProvider format)
         {
             return int.Parse(s, style, format);
         }
 
-        public static bool TryParse(string s, out OInt32 result)
+        public static bool TryParse(string s, out FInt64 result)
         {
             bool b = int.TryParse(s, out int i);
             result = i;
             return b;
         }
 
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out OInt32 result)
+        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out FInt64 result)
         {
             bool b = int.TryParse(s, style, provider, out int i);
             result = i;
             return b;
         }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }
