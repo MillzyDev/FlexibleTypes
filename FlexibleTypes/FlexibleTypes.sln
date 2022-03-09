@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexibleTypes", "FlexibleTypes.csproj", "{0A3E8CB8-24C3-4FA0-8037-AA9B977F85A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexibleTypes.Tests", "..\TypeUtils.Tests\FlexibleTypes.Tests.csproj", "{8B465F47-68B4-4ECA-9E9F-D54B68F0E4D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexibleTypes.Tests", "..\FlexibleTypes.Tests\FlexibleTypes.Tests.csproj", "{8B465F47-68B4-4ECA-9E9F-D54B68F0E4D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
