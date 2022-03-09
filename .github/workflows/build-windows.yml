@@ -24,7 +24,7 @@ jobs:
     - name: Build Tests
       run: dotnet build TypeUtils.Tests/TypeUtils.Tests.csproj
     - name: Run Tests
-      run: ./TypeUtils.Tests/bin/Debug/net6.0/TypeUtils.Tests.exe
+      run: TypeUtils.Tests/bin/Debug/net6.0/TypeUtils.Tests.exe
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
