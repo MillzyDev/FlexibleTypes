@@ -9,4 +9,10 @@ namespace TypeUtils.Tests
         public static readonly FEnum<Value>.FValue FR = new Value("French", "FR");
         public static readonly FEnum<Value>.FValue ES = new Value("Spanish", "ES");
     }
+
+    enum Thingy
+    {
+        Thing1,
+        Thing2
+    }
 }

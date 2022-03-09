@@ -1,5 +1,4 @@
 ﻿using fint = TypeUtils.Integer.FInt32;
-using fshort = TypeUtils.Integer.FInt16;
 
 namespace TypeUtils.Tests
 {
@@ -18,11 +17,6 @@ namespace TypeUtils.Tests
                 j++;
                 Console.WriteLine(i);
             }
-
-            fshort x = new(6, min: 0, max: 5);
-            Console.WriteLine($"Overflow FInt16: {x}");
-            fshort y = new(-1, min: 0, max: 5);
-            Console.WriteLine($"Underflow FInt16: {y}");
         }
     }
 }

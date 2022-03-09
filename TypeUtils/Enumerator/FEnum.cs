@@ -32,11 +32,17 @@ namespace TypeUtils.Enumerator
         /// </summary>
         public class FValue
         {
+            /// <summary>
+            /// Implicitly converts <see cref="FValue"/> to <typeparamref name="T"/>
+            /// </summary>
             public static implicit operator T(FValue value)
             {
                 return value.Value;
             }
 
+            /// <summary>
+            /// Implicitly converts <typeparamref name="T"/> to <see cref="FValue"/>
+            /// </summary>
             public static implicit operator FValue(T value)
             {
                 return new FValue(value);
@@ -48,7 +54,6 @@ namespace TypeUtils.Enumerator
             /// <summary>
             /// Constructs a new enum value
             /// </summary>
-            /// <param name="value"></param>
             public FValue(T value) => Value = value;
         }
     }
