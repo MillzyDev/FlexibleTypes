@@ -16,7 +16,7 @@ namespace TypeUtils.Number
     /// If the <see cref="OInt64"/> instance is set to a value beyond the maximum value, the value will be the maximum value, the same is true for any value before the minimum value
     /// <code>
     /// using TypeUtils.Number;
-    /// using olong = OInt64
+    /// using olong = OInt64;
     /// ...
     /// olong i; // MaxValue is long.MaxValue and MinValue is long.MinValue by default.
     /// i.MaxValue = 5;
