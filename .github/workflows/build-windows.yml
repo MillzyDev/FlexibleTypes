@@ -16,11 +16,15 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.x.x
+        dotnet-version: 6.x.x
     - name: Restore dependencies
       run: dotnet restore TypeUtils/TypeUtils.csproj
     - name: Build
       run: dotnet build TypeUtils/TypeUtils.csproj --no-restore 
+    - name: Build Tests
+      run: dotnet build TypeUtils.Tests/TypeUtils.Tests.csproj
+    - name: Run Tests
+      run: ./TypeUtils.Tests/bin/Debug/net6.0/TypeUtils.Tests.exe
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
